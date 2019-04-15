@@ -63,6 +63,7 @@ const errorHandler = error => {
 
 /**
  * 配置request请求时的默认参数
+ * prefix:http://127.0.0.1:8012
  */
 const request = extend({
   errorHandler, // 默认错误处理

@@ -77,13 +77,13 @@ export default {
   theme: {
     'primary-color': primaryColor,
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  proxy: {
+    '/server/api/': {
+      target: 'http://127.0.0.1:8012',
+      changeOrigin: true,
+      pathRewrite: { '^/server/api': '' },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
@@ -114,6 +114,5 @@ export default {
   manifest: {
     basePath: '/',
   },
-
   chainWebpack: webpackPlugin,
 };
