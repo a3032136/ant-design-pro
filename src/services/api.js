@@ -106,6 +106,7 @@ export async function updateFakeList(params) {
 export async function fakeAccountLogin(params) {
   return request('/server/api/login/go', {
     method: 'POST',
+    requestType: 'form',
     data: params,
   });
 }
