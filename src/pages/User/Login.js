@@ -3,6 +3,7 @@ import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
 import { Alert } from 'antd';
 import Login from '@/components/Login';
+import md5 from 'md5';
 import styles from './Login.less';
 
 const { Tab, UserName, Password, Submit } = Login;
@@ -28,6 +29,7 @@ class LoginPage extends Component {
         type: 'login/login',
         payload: {
           ...values,
+          password: md5(values.password),
           type,
         },
       });
@@ -55,9 +57,9 @@ class LoginPage extends Component {
             {login.status === 'error' &&
               login.type === 'account' &&
               !submitting &&
-              this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
+              this.renderMessage(login.msg)}
             <UserName
-              name="userName"
+              name="account"
               placeholder={`${formatMessage({ id: 'app.login.userName' })}: 请输入用户名...`}
               rules={[
                 {

@@ -15,12 +15,18 @@ export default {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
+      if (response.code !== '1') {
+        response.status = 'error';
+        response.type = 'account';
+      } else {
+        response.currentAuthority = 'admin';
+      }
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.code === '1') {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -74,6 +80,7 @@ export default {
         ...state,
         status: payload.status,
         type: payload.type,
+        msg: payload.msg,
       };
     },
   },
